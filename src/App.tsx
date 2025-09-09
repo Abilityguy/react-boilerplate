@@ -1,7 +1,7 @@
 import Header from "@/Header";
 import Hero from "@/Hero";
 import Footer from "@/Footer";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function App() {
   const [showSearchModal, setShowSearchModal] = useState(false);
