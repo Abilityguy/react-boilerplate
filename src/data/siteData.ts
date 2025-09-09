@@ -1,4 +1,10 @@
 import { Cpu, Shield, Zap, Bot, type LucideIcon } from "lucide-react"
+import image1 from "@/assets/carousel/image1.png"
+import image2 from "@/assets/carousel/image2.png"
+import image3 from "@/assets/carousel/image3.png"
+import image4 from "@/assets/carousel/image4.png"
+import image5 from "@/assets/carousel/image5.png"
+import image6 from "@/assets/carousel/image6.png"
 
 export interface BuiltForItem {
   icon: LucideIcon;
@@ -18,10 +24,10 @@ export const builtForItems: BuiltForItem[] = [
 ]
 
 export const carouselSlides: CarouselSlide[] = [
-  { imageSrc: "./src/assets/carousel/image1.png" },
-  { imageSrc: "./src/assets/carousel/image2.png" },
-  { imageSrc: "./src/assets/carousel/image3.png" },
-  { imageSrc: "./src/assets/carousel/image4.png" },
-  { imageSrc: "./src/assets/carousel/image5.png" },
-  { imageSrc: "./src/assets/carousel/image6.png" },
+  { imageSrc: image1 },
+  { imageSrc: image2 },
+  { imageSrc: image3 },
+  { imageSrc: image4 },
+  { imageSrc: image5 },
+  { imageSrc: image6 },
 ]
