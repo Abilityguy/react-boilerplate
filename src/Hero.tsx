@@ -1,109 +1,119 @@
-import RegisterAndDownloadButton from "@/RegisterAndDownloadButton"
+import { Button } from "@/components/ui/button";
+import { Play, Download } from "lucide-react";
+import {
+  builtForItems,
+  carouselSlides,
+  type BuiltForItem,
+} from "@/data/siteData";
+import { useState, useEffect, type FC } from "react";
 
-interface HeroProps {
-    scrollY: number;
-}
+// Reusable FeatureItem Component with defined prop types
+const FeatureItem: FC<{ item: BuiltForItem }> = ({
+  item: { icon: Icon, label, color },
+}) => (
+  <div className="text-center group cursor-pointer">
+    <div className="flex flex-col items-center space-y-3">
+      <div
+        className={`p-4 rounded-2xl bg-gradient-to-r ${color} group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-xl border border-slate-200`}
+      >
+        <Icon className="w-8 h-8 text-slate-600 drop-shadow-sm" />
+      </div>
+      <div className="text-slate-700 font-semibold text-base group-hover:text-slate-900 transition-colors duration-300">
+        {label}
+      </div>
+    </div>
+  </div>
+);
 
-export default function Hero({ scrollY }: HeroProps) {
-    const heroAnimationProgress = Math.min(scrollY, 300) / 300;
-    const heroOpacity = 1 - heroAnimationProgress;
-    const heroTranslateY = heroAnimationProgress * -20;
+// Custom Hook for Carousel Logic
+const useCarousel = (numSlides: number, intervalTime = 4000) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-    return (
-        <>
-        <style>
-            {`
-            @keyframes scroll {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(-50%); }
-            }
-            .animate-scroll {
-                animation: scroll 20s linear infinite;
-            }
-            .carousel-item {
-                min-width: calc(33.33% - 1.5rem); /* Adjust width for 3 items with gap */
-            }
-            `}
-        </style>
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % numSlides);
+    }, intervalTime);
+    return () => clearInterval(interval);
+  }, [numSlides, intervalTime]);
 
-        <div className="h-screen flex flex-col items-center justify-center text-center">
-            <h1 
-                className="text-4xl md:text-6xl font-bold text-gray-800 transition-all duration-500"
-                style={{ opacity: heroOpacity, transform: `translateY(${heroTranslateY}px)` }}
-            >
-                Accelerate Firmware Development
-            </h1>
-            {/* Small text below the hero heading, fades out with it */}
-            <p 
-                className="text-lg md:text-xl text-gray-700 transition-all duration-500 mt-2"
-                style={{ opacity: heroOpacity, transform: `translateY(${heroTranslateY}px)` }}
-            >
-                ARX lets you design and develop ARM & RISC-V architecture based firmware
+  return currentSlide;
+};
+
+export default function HeroSection() {
+  const currentSlide = useCarousel(carouselSlides.length);
+
+  return (
+    <main className="flex-1 text-center px-4 md:px-8 py-4">
+      <div className="max-w-7xl mx-auto space-y-8">
+        <div className="space-y-6 animate-in fade-in duration-1000">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight tracking-tight">
+            Accelerate Firmware Development
+          </h1>
+
+          <div className="max-w-4xl mx-auto space-y-1">
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
+              ARX lets you design and develop firmware for ARM & RISC-V
+              platforms.
             </p>
-                        <p 
-                className="text-lg md:text-xl text-gray-700 transition-all duration-500 mt-2"
-                style={{ opacity: heroOpacity, transform: `translateY(${heroTranslateY}px)` }}
-            >
-                Rich set of inbuilt libraries to accelerate development
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
+              Leverage inbuilt libraries and multicore support to reduce
+              time-to-market.
             </p>
-            <div className="px-6 py-3">
-                <RegisterAndDownloadButton />
-            </div>
+          </div>
 
-            {/* The new "Main Graphics" placeholder, now larger and below the text */}
-            <div 
-                className="w-full max-w-lg md:max-w-3xl h-64 md:h-96 bg-gray-400 rounded-lg shadow-lg flex items-center justify-center transition-all duration-500 mb-8"
-                style={{ opacity: heroOpacity, transform: `translateY(${heroTranslateY}px)` }}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
+            <Button className="flex-1 max-w-[200px] !bg-teal-600 hover:!bg-teal-700 !text-white px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl shadow-lg rounded-xl !border-none">
+              Download ARX
+              <Download className="ml-2 w-5 h-5" />
+            </Button>
+            <Button
+              variant="outline"
+              className="flex-1 max-w-[200px] px-8 py-4 text-lg font-semibold border-2 border-slate-300 hover:bg-slate-50 hover:text-slate-700 hover:border-teal-500 transition-all duration-300 hover:scale-105 text-slate-700 bg-white rounded-xl shadow-lg hover:shadow-xl"
             >
-                <span className="text-2xl font-bold text-gray-800">Main Graphics</span>
-            </div>
-
-            {/* New carousel section for "Built for" */}
-            <div 
-                className="w-full overflow-hidden px-4"
-                style={{ opacity: heroOpacity, transform: `translateY(${heroTranslateY}px)` }}
-            >
-                <p className="text-sm text-gray-600 font-semibold uppercase tracking-wider mb-2">Built for</p>
-                {/* The looping carousel container. The content is duplicated to allow for a seamless loop */}
-                <div className="flex space-x-6 animate-scroll">
-                    {/* Carousel Items (duplicated for seamless loop) */}
-                    <div className="carousel-item flex-shrink-0 px-4 py-2 bg-white rounded-full shadow-sm text-gray-800 text-sm font-medium whitespace-nowrap">Embedded System</div>
-                    <div className="carousel-item flex-shrink-0 px-4 py-2 bg-white rounded-full shadow-sm text-gray-800 text-sm font-medium whitespace-nowrap">Robotics</div>
-                    <div className="carousel-item flex-shrink-0 px-4 py-2 bg-white rounded-full shadow-sm text-gray-800 text-sm font-medium whitespace-nowrap">Automotive</div>
-                    <div className="carousel-item flex-shrink-0 px-4 py-2 bg-white rounded-full shadow-sm text-gray-800 text-sm font-medium whitespace-nowrap">Defence</div>
-                    {/* Duplicated set */}
-                    <div className="carousel-item flex-shrink-0 px-4 py-2 bg-white rounded-full shadow-sm text-gray-800 text-sm font-medium whitespace-nowrap">Embedded System</div>
-                    <div className="carousel-item flex-shrink-0 px-4 py-2 bg-white rounded-full shadow-sm text-gray-800 text-sm font-medium whitespace-nowrap">Robotics</div>
-                    <div className="carousel-item flex-shrink-0 px-4 py-2 bg-white rounded-full shadow-sm text-gray-800 text-sm font-medium whitespace-nowrap">Automotive</div>
-                    <div className="carousel-item flex-shrink-0 px-4 py-2 bg-white rounded-full shadow-sm text-gray-800 text-sm font-medium whitespace-nowrap">Defence</div>
-                </div>
-            </div>
+              <Play className="mr-2 w-5 h-5" />
+              Get Started
+            </Button>
+          </div>
         </div>
 
-        {/* Graphics Section 1 */}
-        <div className="h-screen flex flex-col items-center justify-center text-center p-12">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-700">Graphics 1</h2>
-            <div className="w-full max-w-md h-64 bg-gray-300 rounded-lg shadow-md flex items-center justify-center">
-                <span className="text-xl text-gray-600">Placeholder for Graphics 1</span>
+        <div className="flex items-center justify-center animate-in slide-in-from-bottom duration-1000 delay-300">
+          <div className="relative bg-white rounded-2xl shadow-lg border border-slate-200 inline-block">
+            <div className="relative overflow-hidden p-4 w-[720px] h-[360px]">
+              {carouselSlides.map((slide, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={`absolute top-4 left-5 transition-all duration-1000 ease-in-out ${
+                      index === currentSlide
+                        ? "opacity-100 translate-x-0"
+                        : index < currentSlide
+                        ? "opacity-0 -translate-x-full"
+                        : "opacity-0 translate-x-full"
+                    }`}
+                  >
+                    <img
+                      src={slide.imageSrc || "/placeholder.svg"}
+                      alt={`ARX RTOS Feature ${index + 1}`}
+                      className="w-[680px] h-80 object-cover rounded-xl"
+                    />
+                  </div>
+                );
+              })}
             </div>
+          </div>
         </div>
 
-        {/* Graphics Section 2 */}
-        <div className="h-screen flex flex-col items-center justify-center text-center p-12 bg-gray-100">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-700">Graphics 2</h2>
-            <div className="w-full max-w-md h-64 bg-gray-300 rounded-lg shadow-md flex items-center justify-center">
-                <span className="text-xl text-gray-600">Placeholder for Graphics 2</span>
-            </div>
+        <div className="space-y-6 animate-in slide-in-from-bottom duration-1000 delay-500">
+          <h3 className="text-sm font-bold text-slate-600 tracking-widest uppercase">
+            Built For
+          </h3>
+          <div className="grid grid-cols-2 md:flex md:items-center md:justify-center md:space-x-20 gap-8 md:gap-0">
+            {builtForItems.map((item, index) => (
+              <FeatureItem key={index} item={item} />
+            ))}
+          </div>
         </div>
-
-        {/* Graphics Section 3 */}
-        <div className="h-screen flex flex-col items-center justify-center text-center p-12">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-700">Graphics 3</h2>
-            <div className="w-full max-w-md h-64 bg-gray-300 rounded-lg shadow-md flex items-center justify-center">
-                <span className="text-xl text-gray-600">Placeholder for Graphics 3</span>
-            </div>
-        </div>
-
-        </>
-    )
+      </div>
+    </main>
+  );
 }

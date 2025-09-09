@@ -1,29 +1,54 @@
-
 import { Search, User, Mail } from "lucide-react";
-import logo from "@/assets/logo.jpeg"
-import RegisterAndDownloadButton from "@/RegisterAndDownloadButton";
+import arxLogo from "@/assets/logo2.png";
 
 interface HeaderProps {
-    isVisible: boolean;
+  onSearchClick: () => void;
 }
 
-export default function Header({ isVisible }: HeaderProps) {
-    return (
-        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-1000 bg-white/80 backdrop-blur-md ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full"}`}>
-            <div className="w-full px-4 sm:px-6 py-6">
-                <div className="max-w-7xl mx-auto flex justify-between items-center">
-                        { /* Logo */ }
-                        <img src={logo} alt="ARX logo" className="h-12 w-auto mr-4 rounded-lg"/>
-                    
-                        { /* Icons */ }
-                        <div className="flex gap-4 sm:gap-6 items-center">
-                            <Search className="w-6 h-6 text-gray-500 cursor-pointer hover:text-teal-500 transition-colors duration-300 hover:scale-110 transform" />
-                            <User className="w-6 h-6 text-gray-500 cursor-pointer hover:text-teal-500 transition-colors duration-300 hover:scale-110 transform" />
-                            <Mail className="w-6 h-6 text-gray-500 cursor-pointer hover:text-teal-500 transition-colors duration-300 hover:scale-110 transform" />
-                            <RegisterAndDownloadButton/>
-                        </div>
-                </div>
-            </div>
-        </header>
-    )
+export default function Header({ onSearchClick }: HeaderProps) {
+  return (
+    <header className="flex items-center justify-between px-4 md:px-8 py-4 border-b border-slate-200 bg-white sticky top-0 z-50 shadow-sm">
+      <div className="flex items-center gap-4">
+        <div>
+          <div className="text-xl md:text-2xl font-black text-slate-900">
+            ARX RTOS
+          </div>
+          <div className="text-xs md:text-sm italic text-slate-500 font-medium">
+            Lightweight | Deterministic | Scalable
+          </div>
+        </div>
+      </div>
+      <div className="flex items-center gap-4">
+        <img
+          src={arxLogo}
+          alt="ARX Logo"
+          className="w-20 h-20" // Add any Tailwind CSS classes for styling
+        />
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() =>
+              (window.location.href = "mailto:contact@arx-rtos.com")
+            }
+            className="p-2.5 rounded-xl hover:bg-slate-100 transition-all duration-300 hover:scale-110 group shadow-sm hover:shadow-md"
+            aria-label="Contact us"
+          >
+            <Mail className="w-4 h-4 md:w-5 md:h-5 text-slate-600 group-hover:text-teal-600 transition-colors" />
+          </button>
+          <button
+            onClick={onSearchClick}
+            className="p-2.5 rounded-xl hover:bg-slate-100 transition-all duration-300 hover:scale-110 group shadow-sm hover:shadow-md"
+            aria-label="Search"
+          >
+            <Search className="w-4 h-4 md:w-5 md:h-5 text-slate-600 group-hover:text-teal-600 transition-colors" />
+          </button>
+          <button
+            className="p-2.5 rounded-xl hover:bg-slate-100 transition-all duration-300 hover:scale-110 group shadow-sm hover:shadow-md"
+            aria-label="User account"
+          >
+            <User className="w-4 h-4 md:w-5 md:h-5 text-slate-600 group-hover:text-teal-600 transition-colors" />
+          </button>
+        </div>
+      </div>
+    </header>
+  );
 }
