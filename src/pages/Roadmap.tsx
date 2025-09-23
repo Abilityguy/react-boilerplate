@@ -1,12 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import { Map, ChevronLeft, ChevronRight, Download, Calendar } from "lucide-react"
+import { Map } from "lucide-react"
+// import { Map, ChevronLeft, ChevronRight, Download, Calendar } from "lucide-react"
 import Header from "@/Header"
 import PageTransition from "@/components/page-transition"
 
 export default function Roadmap() {
-    const [currentSlide, setCurrentSlide] = useState(0)
+    // const [currentSlide, setCurrentSlide] = useState(0)
+    const [currentSlide, _] = useState(0)
 
     // Mock PDF slides - in a real implementation, these would be actual PDF pages
     const roadmapSlides = [
@@ -18,17 +20,17 @@ export default function Roadmap() {
         },
     ]
 
-    const nextSlide = () => {
-        setCurrentSlide((prev) => (prev + 1) % roadmapSlides.length)
-    }
+    // const nextSlide = () => {
+    //     setCurrentSlide((prev) => (prev + 1) % roadmapSlides.length)
+    // }
 
-    const prevSlide = () => {
-        setCurrentSlide((prev) => (prev - 1 + roadmapSlides.length) % roadmapSlides.length)
-    }
+    // const prevSlide = () => {
+    //     setCurrentSlide((prev) => (prev - 1 + roadmapSlides.length) % roadmapSlides.length)
+    // }
 
-    const goToSlide = (index: number) => {
-        setCurrentSlide(index)
-    }
+    // const goToSlide = (index: number) => {
+    //     setCurrentSlide(index)
+    // }
 
     return (
         <PageTransition>

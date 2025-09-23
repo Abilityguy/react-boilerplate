@@ -1,6 +1,6 @@
-import { Search, User, Mail, ArrowLeft } from "lucide-react";
+import { Mail, ArrowLeft } from "lucide-react";
 import arxLogo from "@/assets/logo2.png";
-import { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface HeaderProps {
@@ -15,7 +15,7 @@ export default function Header({
     subtitle = "Lightweight | Deterministic | Scalable"
 
 }: HeaderProps) {
-    const [showSearchModal, setShowSearchModal] = useState(false)
+    // const [showSearchModal, setShowSearchModal] = useState(false)
 
     return (
         <>
