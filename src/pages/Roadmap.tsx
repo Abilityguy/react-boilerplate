@@ -5,6 +5,7 @@ import { Map } from "lucide-react"
 // import { Map, ChevronLeft, ChevronRight, Download, Calendar } from "lucide-react"
 import Header from "@/Header"
 import PageTransition from "@/components/page-transition"
+import RoadmapImage from "@/assets/roadmap.png"
 
 export default function Roadmap() {
     // const [currentSlide, setCurrentSlide] = useState(0)
@@ -16,7 +17,7 @@ export default function Roadmap() {
             id: 1,
             title: "ARX RTOS Roadmap Overview",
             description: "Strategic vision and development timeline for ARX RTOS",
-            image: "./src/assets/roadmap.png",
+            image: RoadmapImage,
         },
     ]
 
