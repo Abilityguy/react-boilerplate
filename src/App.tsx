@@ -1,45 +1,38 @@
-import Header from "@/Header";
-import Hero from "@/Hero";
-import Footer from "@/Footer";
-import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from '@/pages/Home';
+import Documentation from '@/pages/Documentation';
+import Footer from '@/Footer';
+import Terms from '@/pages/Terms';
+import Privacy from '@/pages/Privacy';
+import Changelog from '@/pages/Changelog';
+import Partners from '@/pages/Partners';
+import Support from '@/pages/Support';
+import Careers from './pages/Careers';
+import Roadmap from './pages/Roadmap';
 
-export default function App() {
-  const [showSearchModal, setShowSearchModal] = useState(false);
+function App() {
 
   return (
-    <div className="bg-gradient-to-b from-white to-gray-200 font-sans min-h-screen">
-      {/* Header */}
-      <Header onSearchClick={() => setShowSearchModal(true)} />
-      {showSearchModal && (
-        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-8 w-full max-w-md shadow-2xl border border-slate-200">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-slate-900">
-                Search ARX Documentation
-              </h3>
-              <button
-                onClick={() => setShowSearchModal(false)}
-                className="text-slate-400 hover:text-slate-600 text-2xl"
-              >
-                ×
-              </button>
-            </div>
-            <input
-              type="text"
-              placeholder="Search features, APIs, examples..."
-              className="w-full p-4 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-              autoFocus
-            />
-            <div className="mt-4 text-sm text-slate-500">
-              Popular searches: Real-time scheduling, Memory management,
-              Multi-core support
-            </div>
-          </div>
-        </div>
-      )}
+    <Router>
+      <div className="bg-gradient-to-b from-white to-gray-200 font-sans min-h-screen">
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-      <Hero />
-      <Footer />
-    </div>
+          <Route path="/documentation" element={<Documentation />} />
+          <Route path="/changelog" element={<Changelog />} />
+          <Route path="/roadmap" element={<Roadmap />} />
+
+          <Route path="/partners" element={<Partners />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/careers" element={<Careers />} />
+
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
+
+export default App;
