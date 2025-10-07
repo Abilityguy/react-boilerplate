@@ -9,54 +9,66 @@ export default function Documentation() {
             id: "1",
             title: "ARXOS Overview",
             description: "High-level introduction, features, and architecture of ARXOS.",
-            filename: "./src/assets/documents/arxos.pdf",
+            filename: "/documents/arxos.pdf",
         },
         {
             id: "2",
-            title: "Release Notes",
+            title: "ARX Release Package",
             description: "Detailed information on version changes, improvements, and bug fixes.",
-            filename: "./src/assets/documents/arxos.pdf",
+            filename: "/documents/arx_package_structure.pdf",
         },
         {
             id: "3",
             title: "Environment Setup Guide",
             description: "Guide to installing necessary toolchains, IDEs, QEMU, and other prerequisites.",
-            filename: "./src/assets/documents/arxos.pdf",
+            filename: "/documents/arx_env_setup.pdf",
         },
         {
             id: "4",
             title: "Build & Configuration Guide",
             description: "Step-by-step instructions to configure and build ARXOS for specific hardware targets.",
-            filename: "./src/assets/documents/arxos.pdf",
+            filename: "/documents/arx_build_config.pdf",
         },
         {
             id: "5",
             title: "ARXOS API Reference",
             description: "Comprehensive API documentation for application developers.",
-            filename: "./src/assets/documents/arxos.pdf",
+            filename: "/documents/arx_api_manual.pdf",
         },
         {
             id: "6",
             title: "ARX HAL Guide",
             description: "Details on the Hardware Abstraction Layer for ARXOS.",
-            filename: "./src/assets/documents/arxos.pdf",
+            filename: "/documents/arx_hal_guide.pdf",
         },
         {
             id: "7",
             title: "Porting Guide",
             description: "Steps for porting ARXOS to new boards and architectures.",
-            filename: "./src/assets/documents/arxos.pdf",
+            filename: "/documents/arx_porting_guide.pdf",
         },
         {
             id: "8",
             title: "Debugging Guide",
             description: "Debugging methodologies, tools, and best practices for ARXOS development.",
-            filename: "./src/assets/documents/arxos.pdf",
+            filename: "/documents/arx_debugging_guide.pdf",
+        },
+        {
+            id: "9",
+            title: "Coding Standard",
+            description: "Guidelines and best practices for writing clean, consistent, and maintainable code.",
+            filename: "/documents/arx_coding_standards.pdf",
+        },
+        {
+            id: "10",
+            title: "Release Archive",
+            description: "Access to previous versions, release notes, and documentation for historical reference.",
+            filename: "/documents/arx_rlz_archive.pdf",
         },
     ]
 
     const openPDF = (filename: string) => {
-        window.open(`/${filename}`, "_blank")
+        window.open(`${filename}`, "_blank")
     }
 
     return (
